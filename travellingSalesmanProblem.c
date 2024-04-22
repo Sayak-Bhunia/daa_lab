@@ -1,4 +1,3 @@
-TRAVELLING SALESMAN PROBLEM : 
 #include <stdio.h>
 int tsp_g[10][10] = {
    {12, 30, 33, 10, 45},
