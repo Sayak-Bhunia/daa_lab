@@ -1,4 +1,7 @@
-#include<stdio.h>
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+#include<math.h>
 
 void swap(int *a, int *b) {
     int z = *a;
@@ -7,16 +10,15 @@ void swap(int *a, int *b) {
 }
 
 int partition(int a[], int l, int h) {
-    int pivot = a[h];
     int i = l-1;
     for(int j=l;j<h;j++) {
-        if(a[j]<=pivot) {
+        if(a[j]<=a[h]) {
             i++;
-            swap(&a[i],&a[j]);
+            swap(&a[i], &a[j]);
         }
     }
-    swap(&a[i+1],&a[h]);
-    return (i+1);
+    swap(&a[i+1], &a[h]);
+    return i+1;
 }
 
 void quickSort(int a[], int l, int h) {
@@ -27,18 +29,17 @@ void quickSort(int a[], int l, int h) {
     }
 }
 
-int main()
-{
-    int a[8];
-    printf("enter elements: ");
-    for(int i=0;i<8;i++) {
-        scanf("%d",&a[i]);
-    }
-    quickSort(a, 0, 7);
-    printf("\nSorted Array:\n");
-    for(int i=0;i<8;i++) {
-        printf("%d ",a[i]);
-    }
-}
-
-// 7 19 32 16 5 13 67 90
+int main() {
+    int n;
+    printf("enter the size of array = ");
+    scanf("%d",&n);
+    int a[n];
+    printf("enter the elements = ");
+    for(int i=0;i<n;i++) scanf("%d",&a[i]);
+    printf("original array = ");
+    for(int i=0;i<n;i++) printf("%d ",a[i]);
+    printf("\n");
+    quickSort(a, 0, n-1);
+    printf("sorted array = ");
+    for(int i=0;i<n;i++) printf("%d ",a[i]);
+} 
