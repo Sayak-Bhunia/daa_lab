@@ -1,46 +1,39 @@
-#include <stdio.h>
-#define nV 4
+#include<stdio.h>
+#define n 4
 #define inf 999
 
-void printMatrix(int matrix[][nV]) {
-  for (int i = 0; i < nV; i++) {
-    for (int j = 0; j < nV; j++) {
-      if (matrix[i][j] == inf)
-        printf("%4s", "inf");
-      else
-        printf("%4d", matrix[i][j]);
+void printMatrix(int m[][n]) {
+    for(int i=0;i<n;i++) {
+        for(int j=0;j<n;j++) {
+            if(m[i][j] == inf) printf("%4s",inf);
+            else printf("%4d",m[i][j]);
+        }
+        printf("\n");
     }
-    printf("\n");
-  }
 }
 
-void floydWarshall(int g[][nV]) {
-  int matrix[nV][nV], i, j, k;
-
-  // Initialize the matrix with the graph
-  for (i = 0; i < nV; i++) {
-    for (j = 0; j < nV; j++) {
-      matrix[i][j] = g[i][j];
+void floydWarshall(int a[][n]) {
+    int m[n][n];
+    for(int i=0;i<n;i++) {
+        for(int j=0;j<n;j++) m[i][j] = a[i][j];
     }
-  }
-
-  // Floyd-Warshall algorithm
-  for (k = 0; k < nV; k++) {
-    for (i = 0; i < nV; i++) {
-      for (j = 0; j < nV; j++) {
-        if (matrix[i][k] + matrix[k][j] < matrix[i][j])
-          matrix[i][j] = matrix[i][k] + matrix[k][j];
-      }
+    for(int k=0;k<n;k++) {
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n;j++) {
+                if(m[i][k]+m[k][j]<m[i][j]) {
+                    m[i][j] = m[i][k] + m[k][j];
+                }
+            }
+        }
     }
-  }
-  printMatrix(matrix);
+    printMatrix(m);
 }
 
-int main() {
-  int g[nV][nV] = {{0, 3, inf, 5},
+int main()
+{
+    int g[n][n] = {{0, 3, inf, 5},
                    {2, 0, inf, 4},
                    {inf, 1, 0, inf},
                    {inf, inf, 2, 0}};
-  floydWarshall(g);
-  return 0;
+    floydWarshall(g);
 }
