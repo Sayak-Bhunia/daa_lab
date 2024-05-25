@@ -51,7 +51,9 @@ void dijkstra(int a[m][m], int n, int st) {
 int main() {
     int a[m][m];
     int n,u;
+    printf("enter the number of nodes = ");
     scanf("%d",&n);
+    printf("enter the adjmatrix = ");
     for(int i=0;i<n;i++) {
         for(int j=0;j<n;j++) scanf("%d",&a[i][j]);
     }
