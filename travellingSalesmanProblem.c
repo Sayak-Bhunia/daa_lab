@@ -1,45 +1,40 @@
-// Online C compiler to run C program online
 #include <stdio.h>
 #define inf 9999
 #define m 10
-int a[m][m] = {
-   {12, 30, 33, 10, 45},
-   {56, 22, 9, 15, 18},
-   {29, 13, 8, 5, 12},
-   {33, 28, 16, 10, 3},
-   {1, 4, 30, 24, 20}
-};
-int vis[m], n, cost = 0;
 
-void tsp(int c) {
-   int adjv = 999;
-   int mn = 999;
-   vis[c] = 1;
-   printf("%d ", c+1);
-   for(int i=0;i<n;i++) {
-      if(a[c][i] != 0 && vis[i] == 0) {
-         if(a[c][i]<mn) mn = a[c][i];
-         adjv = i;
-      }
-   }
-   if(mn != 999) cost += mn;
-   if(adjv == 999) {
-      adjv = 0;
-      printf("%d", adjv+1);
-      cost += a[c][adjv];
-      return;
-   }
-   tsp(adjv);
+int tsp(int n, int a[][m], int vis[], int c, int cost) {
+    int adjv = inf;
+    int mn = inf;
+    vis[c] = 1;
+    printf("%d ", c + 1);
+    for (int i = 0; i < n; i++) {
+        if (a[c][i] != 0 && vis[i] == 0) {
+            if (a[c][i] < mn) mn = a[c][i];
+            adjv = i;
+        }
+    }
+    if (mn != inf) cost += mn;
+    if (adjv == inf) {
+        adjv = 0;
+        printf("%d", adjv + 1);
+        cost += a[c][adjv];
+        return cost;
+    }
+    return tsp(n, a, vis, adjv, cost);
 }
 
 int main() {
-    int i,j;
-    n = 5;
-    for(i=0;i<n;i++) vis[i] = 0;
+    int n = 5;
+    int a[m][m] = {
+       {12, 30, 33, 10, 45},
+       {56, 22, 9, 15, 18},
+       {29, 13, 8, 5, 12},
+       {33, 28, 16, 10, 3},
+       {1, 4, 30, 24, 20}
+    };
+    int vis[m] = {0};
+    int cost = 0;
     printf("shortest path = ");
-    tsp(0);
-    printf("\nmin cost = ");
-    printf("%d\n",cost);
-    
-    
+    cost = tsp(n, a, vis, 0, cost);
+    printf("\nmin cost = %d\n", cost);
 }
