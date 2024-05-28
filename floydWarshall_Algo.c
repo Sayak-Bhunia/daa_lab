@@ -2,11 +2,11 @@
 #define n 4
 #define inf 999
 
-void printMatrix(int m[][n]) {
+void printMatrix(int a[][n]) {
     for(int i=0;i<n;i++) {
         for(int j=0;j<n;j++) {
-            if(m[i][j] == inf) printf("%4s",inf);
-            else printf("%4d",m[i][j]);
+            if(a[i][j] == inf) printf("0");
+            else printf("%4d",a[i][j]);
         }
         printf("\n");
     }
@@ -27,9 +27,9 @@ void floydWarshall(int a[][n]) {
 
 int main()
 {
-    int g[n][n] = {{0, 3, inf, 5},
+    int a[n][n] = {{0, 3, inf, 5},
                    {2, 0, inf, 4},
                    {inf, 1, 0, inf},
                    {inf, inf, 2, 0}};
-    floydWarshall(g);
+    floydWarshall(a);
 }
