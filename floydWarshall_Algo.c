@@ -13,20 +13,16 @@ void printMatrix(int m[][n]) {
 }
 
 void floydWarshall(int a[][n]) {
-    int m[n][n];
-    for(int i=0;i<n;i++) {
-        for(int j=0;j<n;j++) m[i][j] = a[i][j];
-    }
     for(int k=0;k<n;k++) {
         for(int i=0;i<n;i++) {
             for(int j=0;j<n;j++) {
-                if(m[i][k]+m[k][j]<m[i][j]) {
-                    m[i][j] = m[i][k] + m[k][j];
+                if(a[i][k] + a[k][j]<a[i][j]) {
+                    a[i][j] = a[i][k] + a[k][j];
                 }
             }
         }
     }
-    printMatrix(m);
+    printMatrix(a);
 }
 
 int main()
