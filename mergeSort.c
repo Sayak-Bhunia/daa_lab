@@ -1,11 +1,12 @@
-#include<stdio.h>
+// Online C compiler to run C program online
+#include <stdio.h>
 
 void merge(int a[], int p, int q, int r) {
-    int n1 = q - p + 1;
-    int n2 = r - q;
+    int n1 = q-p+1;
+    int n2 = r-q;
     int l[n1], m[n2];
     for(int i=0;i<n1;i++) l[i] = a[p+i];
-    for(int i=0;i<n2;i++) m[i] = a[q+1+i];
+    for(int i=0;i<n2;i++) m[i] = a[q+i+1];
     int i = 0, j = 0, k = p;
     while(i<n1 && j<n2) {
         if(l[i] <= m[j]) {
@@ -30,27 +31,20 @@ void merge(int a[], int p, int q, int r) {
     }
 }
 
-void mergeSort(int a[], int l, int r) {
-    if(l<r) {
-        int mid = (l+r)/2;
-        mergeSort(a, l, mid);
-        mergeSort(a, mid+1, r);
-        merge(a, l, mid, r);
+void mergeSort(int a[], int l, int h) {
+    if(l<h) {
+        int p = (l+h)/2;
+        mergeSort(a, l, p);
+        mergeSort(a, p+1, h);
+        merge(a, l, p, h);
     }
 }
 
-int main()
-{
-    int a[8];
-    printf("enter elements: ");
-    for(int i=0;i<8;i++) {
-        scanf("%d",&a[i]);
-    }
-    mergeSort(a, 0, 7);
-    printf("\nSorted Array:\n");
-    for(int i=0;i<8;i++) {
-        printf("%d ",a[i]);
-    }
+int main() {
+    int n;
+    scanf("%d",&n);
+    int a[n];
+    for(int i=0;i<n;i++) scanf("%d",&a[i]);
+    mergeSort(a, 0, n-1);
+    for(int i=0;i<n;i++) printf("%d",a[i]);
 }
-
-// 7 19 32 16 5 13 67 90
